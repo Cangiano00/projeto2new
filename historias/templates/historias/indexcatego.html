@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Todas as Histórias nessa categoria são:</h2>
+
+<section>
+    <p>
+      Procurando algo mais especificamente? <a href="{% url 'historias:search' %}">Clica aqui!</a>
+    </p>
+    <p>
+        Não encontrou nenhum relato interessante nessa categoria?
+        <a href="{% url 'historias:create' %}">Adicione o seu!</a>
+      </p>
+</section>
+
+
+{% if historiascatego %}
+<section class="lista-de-cards">
+  {% for historia in historiascatego %}
+  <article class="card">
+    <a href="{% url 'historias:detail' historia.id %}">
+      <img src="{{ historia.capa }}" alt="Imagem de capa {{ historia.name}}"
+    /></a>
+    <p>{{ historia.name }}</p>
+  </article>
+  {% endfor %}
+</section>
+
+
+{% else %}
+<p>Não foi encontrada nenhuma história nessa categoria. Você pode publicar a primeira!</p>
+{% endif %}
+
+{% endblock content %}

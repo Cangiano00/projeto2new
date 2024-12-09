@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %} {{ historia.name }} ({{
+    historia.data }} {% endblock title %} {% block content %}
+    <h1>{{ historia.name }}</h1>
+    
+    <section class="dados-de-filme">
+      <img src="{{ historia.capa }}" alt="capa {{ historia.name}}" />
+      <ul>
+        <li> <b>Data de Publicação:</b> {{ historia.data }}</li>
+        <li><a href="{% url 'historias:update' historia.id %}">Editar</a></li>
+        <li><a href="{% url 'historias:delete' historia.id %}">Apagar</a></li>
+      </ul>
+      <ul>
+        Categorias:
+        {% for cat in historia.categoria.all %}
+         <li><a href="{% url 'historias:indexcatego' pk=cat.id %}">    {{ cat.nome }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="desc-relato">
+      {{ historia.relato }}
+    </section>
+    <hr>
+  <section>
+      <header>
+          <h3>Comentários, Pitacos e Desabafos:</h3>
+      </header>
+      <ul>
+          {% if historia.comment_set.all %}
+              {% for comment in historia.comment_set.all reversed%}
+                  <section class="cardcom">
+                          "{{ comment.texto }}"
+                      <figcaption>—{{ comment.autor }} ({{ comment.data }})</figcaption>
+                    </section>
+              {% endfor %}
+          {% else %}
+              <p>Essa história deixou todos sem palavras até o momento. O chupa cabra também comeu a sua língua?</p>
+          {% endif %}
+      </ul>
+  </section>
+  <hr>
+  <hr>
+    <h3>Achou algo muito estranho ou interessante?</h3>
+    <a href="{% url 'historias:comment' historia.pk %}"><button>Quer dar um Pitaco?</button></a>
+    
+    {% endblock content %}

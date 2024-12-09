@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Opa, bora desenvolver essa crítica construtiva sobre {{ historia.name }}</h2>
+
+<form action="{% url 'historias:comment' historia.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Postar</button>
+</form>
+
+<p><a href="{% url 'historias:detail' historia.id %}">Desistiu? Bora voltar para  a história</a></p>
+{% endblock content %}

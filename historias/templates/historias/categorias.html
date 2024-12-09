@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Categorias
+{% endblock title %}
+
+{% block content %}
+<h2>Categorias de Histórias</h2>
+
+<section>
+    {% for categoria in category_list %}
+    <hr>
+    <article>
+        <div class="lista-de-cards">
+            <div class="card">
+                <a href="{% url 'historias:indexcatego' categoria.id %}">
+                    <p>{{ categoria.nome}}</p>
+                </a>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'historias:createcategoria' %}"><button>Crie sua Categoria</button></a>
+</section>
+
+{% endblock content %}

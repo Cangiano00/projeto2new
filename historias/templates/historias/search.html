@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Procure alguma História Aterrorizante</h2>
+<form action="{% url 'historias:search' %}">
+    <p>
+        <label for="id_query">O que buscas?</label>
+        <input type="text" name="query" id="id_query" />
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+
+<h2>Resultado da Busca</h2>
+
+{% if historia_list %}
+<section class="lista-de-cards">
+    {% for historia in historia_list %}
+    <article class="card">
+        <img src="{{ historia.capa }}" alt="capa{{ historia.name }}">
+        <p>{{ historia.name }} ({{ historia.data }})</p>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Vixe, não tem nada com esse nome ainda. Talvez algum ser maligno tenha apagado!</p>
+{% endif %}
+
+{% endblock content %}

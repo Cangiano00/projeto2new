@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Compartilhe o seu relato com a gente!</h2>
+<form method="POST" action="{% url 'historias:create' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Postar!</button>
+</form>
+
+{% endblock content %}

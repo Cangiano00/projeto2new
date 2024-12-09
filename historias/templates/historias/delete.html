@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'historias:delete' historia.id %}" method="post">
+  {% csrf_token %}
+  <p>
+    Você tem certeza que deseja apagar "{{ historia.name }}"?
+  </p>
+  
+  <button type="submit">Apagar</button>
+
+  <p>Talvez esses segredos realmente devam retornar às profundezas</p>
+</form>
+{% endblock content %}

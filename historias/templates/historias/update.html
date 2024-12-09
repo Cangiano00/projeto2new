@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Atualizar Dados da História {{ historia.name }}</h2>
+<form method="post" action="{% url 'historias:update' historia.id%}">
+  {% csrf_token %}
+  <p>
+    <label for="id_name">Título: </label>
+    <input type="text" name="name" id="id_name" value="{{ historia.name }}" />
+</p>
+  <p>
+    <label for="id_data">Data:</label>
+    <input
+      type="text"
+      name="data"
+      id="id_data"
+      value="{{ historia.data }}"
+    />
+</p>
+  <p>
+    <label for=" id_capa">URL da capa: </label>
+    <input
+      type="url"
+      name="capa"
+      id="id_capa"
+      value="{{historia.capa}}"
+    />
+</p>
+<p>
+    <label for="id_relato">Relato:</label>
+    <input
+      type="text"
+      name="relato"
+      id="id_relato"
+      value="{{ historia.relato }}"
+    />
+</p>
+
+  <button type="submit">Atualizar </button>
+</form>
+{% endblock content %}
